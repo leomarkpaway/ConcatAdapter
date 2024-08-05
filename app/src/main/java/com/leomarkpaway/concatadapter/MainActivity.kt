@@ -13,10 +13,13 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
 
+        val firstLabelAdapter = LabelAdapter("First Section")
         val firstAdapter = FirstAdapter(listOf("Item 1", "Item 2", "Item 3"))
+
+        val secondLabelAdapter = LabelAdapter("Second Section")
         val secondAdapter = SecondAdapter(listOf("Item A", "Item B", "Item C"))
 
-        val concatAdapter = ConcatAdapter(firstAdapter, secondAdapter)
+        val concatAdapter = ConcatAdapter(firstLabelAdapter, firstAdapter, secondLabelAdapter, secondAdapter)
         recyclerView.adapter = concatAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
