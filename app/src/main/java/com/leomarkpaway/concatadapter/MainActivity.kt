@@ -2,8 +2,11 @@ package com.leomarkpaway.concatadapter
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
+import androidx.core.util.component1
+import androidx.core.util.component2
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,6 +46,27 @@ class MainActivity : AppCompatActivity() {
         toggleSecond.setOnClickListener {
             toggleSecondSection()
         }
+
+        recyclerView.addOnItemTouchListener(
+            RecyclerItemClickListener(this, recyclerView,
+                object : RecyclerItemClickListener.OnItemClickListener {
+                    override fun onItemClick(view: View, position: Int) {
+                        val result = concatAdapter.getWrappedAdapterAndPosition(position)
+                        val (adapter, position) = result
+
+                        val adapterType = when (adapter) {
+                            is LabelAdapter -> "LabelAdapter"
+                            is FirstAdapter -> "FirstAdapter"
+                            is SecondAdapter -> "SecondAdapter"
+                            else -> "Unknown Adapter"
+                        }
+                        Log.d("RecyclerItemClickListener", "adapterType $adapterType - position $position")
+                    }
+
+                    override fun onLongItemClick(view: View, position: Int) {
+                    }
+                })
+        )
 
     }
 
