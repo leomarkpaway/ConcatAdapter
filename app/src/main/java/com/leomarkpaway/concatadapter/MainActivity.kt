@@ -42,11 +42,9 @@ class MainActivity : AppCompatActivity() {
 
         toggleFirst.setOnClickListener {
             toggleFirstSection()
-            getPositionAndAdapterId()
         }
         toggleSecond.setOnClickListener {
             toggleSecondSection()
-            getPositionAndAdapterId()
         }
 
         recyclerView.addOnItemTouchListener(
@@ -70,27 +68,6 @@ class MainActivity : AppCompatActivity() {
                 })
         )
 
-    }
-
-    private fun getPositionAndAdapterId() {
-        val adapterPairs = ArrayList<Pair<Int, String>>()
-        for ((index, adapter) in concatAdapter.adapters.withIndex()) {
-            val pair = Pair(index, adapter.toString())
-            adapterPairs.add(pair)
-            if (pair.second == firstLabelAdapter.toString()) {
-                Log.d("getPositionAndAdapterId", "${pair.first} - firstLabelAdapter")
-            }
-            if (pair.second == firstAdapter.toString()) {
-                Log.d("getPositionAndAdapterId", "${pair.first} - firstAdapter")
-            }
-            if (pair.second == secondLabelAdapter.toString()) {
-                Log.d("getPositionAndAdapterId", "${pair.first} - secondLabelAdapter")
-            }
-            if (pair.second == secondAdapter.toString()) {
-                Log.d("getPositionAndAdapterId", "${pair.first} - secondAdapter")
-            }
-        }
-        Log.d("getPositionAndAdapterId", "adapterPairs $adapterPairs")
     }
 
     private fun toggleFirstSection() {
